@@ -1,8 +1,12 @@
+import { useState } from "react"
+import Planets from "./Components/Planets/Planets.jsx"
 
 function App() {
-
   return (
-    <div className=" w-full h-screen flex justify-center items-center px-2 bg-neutral-800 text-white">HELLO WORLD</div>
+    <div className="w-full min-h-screen dark:bg-neutral-800">
+      <Planets/>
+
+    </div>
   )
 }
 
