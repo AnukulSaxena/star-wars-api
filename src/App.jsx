@@ -13,10 +13,11 @@ function App() {
     axios.get(url)
       .then(res => dispatch(setPlanets(res?.data)))
       .catch(res => console.error(res))
+      .finally(window.scroll(0,0))
   },[url])
 
   return (
-    <div className="w-full py-20 min-h-screen dark:bg-neutral-800">
+    <div className="w-full py-20 min-h-screen dark:bg-neutral-900">
       <Header/>
       <Planets/>
     </div>
