@@ -1,26 +1,24 @@
-import { useSelector, useDispatch } from "react-redux";
-import { setUrl } from "../store/homeSlice";
+import { useDispatch } from "react-redux";
 
-const Pagination = ({ setPlanetsData }) => {
-  const { planets } = useSelector((state) => state.home);
+const Pagination = ({ setData, data, setUrl }) => {
   const dispatch = useDispatch();
 
   function handleNext() {
-    if (planets?.next) {
-      setPlanetsData(null);
-      dispatch(setUrl(planets?.next));
+    if (data?.next) {
+      setData(null);
+      dispatch(setUrl(data?.next));
     }
   }
   function handlePrevious() {
-    if (planets?.previous) {
-      setPlanetsData(null);
-      dispatch(setUrl(planets?.previous));
+    if (data?.previous) {
+      setData(null);
+      dispatch(setUrl(data?.previous));
     }
   }
   return (
     <div className="w-full p-2 h-12 flex justify-center items-center">
       <div className="h-full w-fit flex">
-        {planets?.previous && (
+        {data?.previous && (
           <button
             className=" flex items-center hover:dark:fill-neutral-900 fill-neutral-500 dark:hover:bg-neutral-400 rounded-md border-r-0 border dark:border-neutral-900"
             onClick={handlePrevious}
@@ -38,7 +36,7 @@ const Pagination = ({ setPlanetsData }) => {
             </svg>
           </button>
         )}
-        {planets?.next && (
+        {data?.next && (
           <button
             className=" dark:hover:bg-neutral-400 flex items-center rounded-md  border-l-0 hover:dark:fill-neutral-900 fill-neutral-500 border dark:border-neutral-900"
             onClick={handleNext}
