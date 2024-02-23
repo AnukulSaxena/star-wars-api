@@ -1,11 +1,24 @@
-import { useState } from "react"
+import { useEffect } from "react"
 import Planets from "./Components/Planets/Planets.jsx"
+import Header from "./Components/Header/Header.jsx"
+import { useDispatch, useSelector } from "react-redux"
+import axios from "axios"
+import { setPlanets } from "./store/homeSlice.js"
 
 function App() {
-  return (
-    <div className="w-full min-h-screen dark:bg-neutral-800">
-      <Planets/>
+  const dispatch = useDispatch();
+  const {url} = useSelector(state => state.home)
 
+  useEffect(() => {
+    axios.get(url)
+      .then(res => dispatch(setPlanets(res?.data)))
+      .catch(res => console.error(res))
+  },[url])
+
+  return (
+    <div className="w-full py-20 min-h-screen dark:bg-neutral-800">
+      <Header/>
+      <Planets/>
     </div>
   )
 }
