@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import PlanetCard from "./PlanetCard.jsx";
 import { useSelector } from "react-redux";
-import PlanetCardSkeleton from "./PlanetCardSkeleton.jsx";
-import Pagination from "../Pagination.jsx";
+import { PlanetCard, PlanetCardSkeleton, Pagination } from "../Components";
+import { setPlanetUrl } from "../store/homeSlice";
 
 const Planets = () => {
   const [planetsData, setPlanetsData] = useState(null);
@@ -17,7 +16,11 @@ const Planets = () => {
       {planetsData.map((item) => (
         <PlanetCard key={item.url} planet={item} />
       ))}
-      <Pagination setPlanetsData={setPlanetsData} />
+      <Pagination
+        setData={setPlanetsData}
+        setUrl={setPlanetUrl}
+        data={planets}
+      />
     </div>
   ) : (
     <div className="w-full h-fit flex flex-wrap justify-center gap-5">

@@ -3,18 +3,28 @@ import { createSlice } from "@reduxjs/toolkit";
 const homeSlice = createSlice({
   name: "home",
   initialState: {
-    url: "https://swapi.dev/api/planets/",
+    planetUrl: "https://swapi.dev/api/planets/",
     planets: null,
+
+    peopleUrl: "https://swapi.dev/api/people/",
+    people: null,
   },
   reducers: {
-    setUrl(state, action) {
-      state.url = action.payload;
+    setPlanetUrl(state, action) {
+      state.planetUrl = action.payload;
     },
     setPlanets(state, action) {
       state.planets = action.payload;
     },
+    setPeopleUrl(state, action) {
+      state.peopleUrl = action.payload;
+    },
+    setPeople(state, action) {
+      state.people = action.payload;
+    },
   },
 });
 
-export const { setUrl, setPlanets } = homeSlice.actions;
+export const { setPlanetUrl, setPlanets, setPeople, setPeopleUrl } =
+  homeSlice.actions;
 export default homeSlice.reducer;
