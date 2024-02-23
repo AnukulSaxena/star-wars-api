@@ -7,19 +7,23 @@ import { setPlanets } from "./store/homeSlice.js"
 
 function App() {
   const dispatch = useDispatch();
-  const {url} = useSelector(state => state.home)
+  const { url } = useSelector(state => state.home)
 
   useEffect(() => {
+    console.log('req gone')
     axios.get(url)
-      .then(res => dispatch(setPlanets(res?.data)))
+      .then(res => {
+        console.log(res)
+        dispatch(setPlanets(res?.data))
+      })
       .catch(res => console.error(res))
-      .finally(window.scroll(0,0))
-  },[url])
+      .finally(window.scroll(0, 0))
+  }, [url])
 
   return (
-    <div className="w-full py-20 min-h-screen dark:bg-neutral-900">
-      <Header/>
-      <Planets/>
+    <div className="w-full py-20 min-h-screen bg-neutral-200 dark:bg-neutral-900">
+      <Header />
+      <Planets />
     </div>
   )
 }
