@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { PlanetCard, PlanetCardSkeleton, Pagination } from "../Components";
+import { PlanetCard, CardSkeleton, Pagination } from "../Components";
 import { setPlanetUrl } from "../store/homeSlice";
 
 const Planets = () => {
@@ -25,7 +25,7 @@ const Planets = () => {
   ) : (
     <div className="w-full h-fit flex flex-wrap justify-center gap-5">
       {Array.from({ length: 10 }).map((_, index) => (
-        <PlanetCardSkeleton key={index} />
+        <CardSkeleton key={index} />
       ))}
     </div>
   );

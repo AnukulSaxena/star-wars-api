@@ -1,6 +1,6 @@
 import React from "react";
 
-const PlanetCardSkeleton = () => {
+const CardSkeleton = () => {
   return (
     <div
       role="status"
@@ -24,4 +24,4 @@ const PlanetCardSkeleton = () => {
   );
 };
 
-export default PlanetCardSkeleton;
+export default CardSkeleton;

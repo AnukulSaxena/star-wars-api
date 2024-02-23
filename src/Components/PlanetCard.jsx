@@ -42,15 +42,12 @@ const PlanetCard = ({ planet }) => {
         <p>Rotation: {planet.rotation_period}</p>
         <p>Orbit: {planet.orbital_period}</p>
       </div>
-      <div className="flex px-5 justify-between pt-5 border-t border-neutral-500">
+      <div className="flex px-5 justify-center pt-5 border-t border-neutral-500">
         <button
           onClick={handleResidentClick}
-          className="dark:bg-neutral-700 bg-neutral-300 w-24 py-1 rounded-sm"
+          className="dark:bg-neutral-700 bg-neutral-300 w-fit px-10 py-1 rounded-sm"
         >
           Residents
-        </button>
-        <button className="dark:bg-neutral-700 bg-neutral-300 w-24 py-1 rounded-sm">
-          Films
         </button>
       </div>
     </div>
