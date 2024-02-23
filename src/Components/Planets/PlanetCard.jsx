@@ -1,6 +1,9 @@
 import React from 'react'
 
 const PlanetCard = ({ planet }) => {
+  function handleResidentClick() {
+
+  }
   return (
     <div className='dark:text-neutral-400 hover:bg-white hover:dark:bg-neutral-800 transit ease-in-out duration-500 p-5 min-h-80 w-80  hover:shadow-2xl rounded-md border border-neutral-600'>
       <h1
@@ -37,8 +40,13 @@ const PlanetCard = ({ planet }) => {
         <p>Orbit: {planet.orbital_period}</p>
       </div>
       <div className='flex px-5 justify-between pt-5 border-t border-neutral-500'>
-        <button className='dark:bg-neutral-700 bg-neutral-300 w-24 py-1 rounded-sm'>Residents</button>
-        <button className='dark:bg-neutral-700 bg-neutral-300 w-24 py-1 rounded-sm'>Films</button>
+        <button
+          onClick={handleResidentClick}
+          className='dark:bg-neutral-700 bg-neutral-300 w-24 py-1 rounded-sm'
+        >Residents</button>
+        <button
+          className='dark:bg-neutral-700 bg-neutral-300 w-24 py-1 rounded-sm'
+        >Films</button>
       </div>
     </div>
   )
