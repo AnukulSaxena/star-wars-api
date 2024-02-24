@@ -28,7 +28,7 @@ const PlanetCard = ({ planet }) => {
   }
   return (
     <div className="dark:text-neutral-400 hover:bg-white hover:dark:bg-neutral-800 transit ease-in-out duration-500 p-5 min-h-80 w-80  hover:shadow-2xl rounded-md border border-neutral-600">
-      <h1 className=" font-bold dark:text-neutral-200 text-neutral-900 text-5xl pb-5 border-b border-neutral-500">
+      <h1 className="truncate font-bold dark:text-neutral-200 text-neutral-900 text-5xl pb-5 border-b border-neutral-500">
         {planet.name}
       </h1>
 
