@@ -10,21 +10,24 @@ const PlanetCard = ({ planet }) => {
   const dispatch = useDispatch();
 
   function handleResidentClick() {
-    const newPeople = { ...people };
-    newPeople.results = null;
-    dispatch(setPeople(newPeople));
-    navigate("/people/2");
+    const residentCount = planet.residents.length;
+    if (residentCount) {
+      const newPeople = { ...people };
+      newPeople.results = null;
+      dispatch(setPeople(newPeople));
+      navigate(`/people/${residentCount}`);
 
-    Promise.allSettled(planet.residents.map((item) => axios.get(item))).then(
-      (res) => {
-        const filterData = res.map((item) => {
-          if (item.status === "fulfilled") return item.value.data;
-        });
-        const filterPeople = { ...people };
-        filterPeople.results = [...filterData];
-        dispatch(setPeople(filterPeople));
-      }
-    );
+      Promise.allSettled(planet.residents.map((item) => axios.get(item))).then(
+        (res) => {
+          const filterData = res.map((item) => {
+            if (item.status === "fulfilled") return item.value.data;
+          });
+          const filterPeople = { ...people };
+          filterPeople.results = [...filterData];
+          dispatch(setPeople(filterPeople));
+        }
+      );
+    }
   }
   return (
     <div className="dark:text-neutral-400 hover:bg-white hover:dark:bg-neutral-800 transit ease-in-out duration-500 p-5 min-h-80 w-80  hover:shadow-2xl rounded-md border border-neutral-600">
@@ -66,7 +69,7 @@ const PlanetCard = ({ planet }) => {
           onClick={handleResidentClick}
           className="dark:bg-neutral-700 bg-neutral-300 w-fit px-10 py-1 rounded-sm"
         >
-          Residents
+          {planet.residents.length ? "Residents" : "No Residents"}
         </button>
       </div>
     </div>

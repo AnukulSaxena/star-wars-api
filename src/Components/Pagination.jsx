@@ -9,6 +9,7 @@ const Pagination = ({ setData, data, setUrl }) => {
       dispatch(setUrl(data?.next));
     }
   }
+
   function handlePrevious() {
     if (data?.previous) {
       setData(null);

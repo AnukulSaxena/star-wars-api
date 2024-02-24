@@ -1,4 +1,4 @@
 import People from "./People.jsx";
 import Planets from "./Planets.jsx";
-
-export { People, Planets };
+import Error from "./Error.jsx";
+export { People, Planets, Error };
