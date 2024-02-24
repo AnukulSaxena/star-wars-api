@@ -12,6 +12,7 @@ const People = () => {
 
   useEffect(() => {
     if (numCount === -1) {
+      setPeople(null);
       axios
         .get(peopleUrl)
         .then((res) => setPeople(res?.data))
@@ -21,7 +22,7 @@ const People = () => {
       console.log(peopleData);
       setPeople(peopleData);
     }
-  }, [peopleUrl, peopleData]);
+  }, [peopleUrl, peopleData, numCount]);
 
   return people ? (
     <div className="w-full h-fit flex justify-center flex-wrap gap-5">
