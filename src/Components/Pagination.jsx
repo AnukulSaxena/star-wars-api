@@ -1,19 +1,17 @@
-import { useDispatch } from "react-redux";
+import React from "react";
 
 const Pagination = ({ setData, data, setUrl }) => {
-  const dispatch = useDispatch();
-
   function handleNext() {
     if (data?.next) {
       setData(null);
-      dispatch(setUrl(data?.next));
+      setUrl(data?.next);
     }
   }
 
   function handlePrevious() {
     if (data?.previous) {
       setData(null);
-      dispatch(setUrl(data?.previous));
+      setUrl(data?.previous);
     }
   }
   return (

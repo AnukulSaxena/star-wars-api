@@ -1,45 +1,13 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  setPlanets,
-  setPlanetUrl,
-  setPeople,
-  setPeopleUrl,
-} from "../store/homeSlice";
 import { useNavigate, useParams } from "react-router-dom";
 
 const Header = () => {
-  const { planets, people } = useSelector((state) => state.home);
   const { count } = useParams();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    if (count) {
-      if (people?.previous !== null) {
-        const newPeople = { ...people };
-        newPeople.results = null;
-
-        dispatch(setPeople(newPeople));
-        dispatch(setPeopleUrl("https://swapi.dev/api/people/"));
-      }
-    } else {
-      if (planets?.previous !== null) {
-        const newPlanets = { ...planets };
-        newPlanets.results = null;
-
-        dispatch(setPlanets(newPlanets));
-        dispatch(setPlanetUrl("https://swapi.dev/api/planets/"));
-      }
-    }
-  };
-
-  const handlePeopleNavigate = () => {
-    navigate("/people/-1");
-  };
   return (
     <div className="w-full flex justify-between px-5 md:px-10 bg-inherit h-14 fixed top-0 shadow-2xl z-50">
-      <div onClick={handleClick} className="h-full cursor-pointer w-fit px-5">
+      <div className="h-full w-fit px-5">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 48 48"
@@ -62,7 +30,9 @@ const Header = () => {
           Planets
         </div>
         <div
-          onClick={handlePeopleNavigate}
+          onClick={() => {
+            navigate("/people/-1");
+          }}
           className={`w-fit cursor-pointer flex justify-center items-center  h-full ${count ? "border-b dark:border-neutral-200 border-neutral-900" : ""}`}
         >
           People

@@ -1,30 +1,35 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { PeopleCard, CardSkeleton, Pagination } from "../Components";
-import { setPeopleUrl } from "../store/homeSlice";
 import { useParams } from "react-router-dom";
-
+import axios from "axios";
+import { useSelector } from "react-redux";
 const People = () => {
-  const [peopleData, setPeopleData] = useState(null);
-  const { people } = useSelector((state) => state.home);
+  const { peopleData } = useSelector((state) => state.home);
+  const [people, setPeople] = useState(null);
+  const [peopleUrl, setPeopleUrl] = useState("https://swapi.dev/api/people/");
   const { count } = useParams();
   const numCount = parseInt(count);
-  console.log(numCount);
-  useEffect(() => {
-    setPeopleData(people?.results);
-  }, [people]);
 
-  return peopleData ? (
+  useEffect(() => {
+    if (numCount === -1) {
+      axios
+        .get(peopleUrl)
+        .then((res) => setPeople(res?.data))
+        .catch((res) => console.error(res))
+        .finally(window.scroll(0, 0));
+    } else {
+      console.log(peopleData);
+      setPeople(peopleData);
+    }
+  }, [peopleUrl, peopleData]);
+
+  return people ? (
     <div className="w-full h-fit flex justify-center flex-wrap gap-5">
-      {peopleData.map((item) => (
+      {people.results.map((item) => (
         <PeopleCard key={item.url} person={item} />
       ))}
       {count === "-1" && (
-        <Pagination
-          setData={setPeopleData}
-          setUrl={setPeopleUrl}
-          data={people}
-        />
+        <Pagination setData={setPeople} setUrl={setPeopleUrl} data={people} />
       )}
     </div>
   ) : (

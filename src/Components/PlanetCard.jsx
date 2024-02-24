@@ -1,30 +1,27 @@
 import React from "react";
 import axios from "axios";
-import { setPeople } from "../store/homeSlice";
+import { setPeopleData } from "../store/homeSlice";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const PlanetCard = ({ planet }) => {
-  const { people } = useSelector((state) => state.home);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   function handleResidentClick() {
+    dispatch(setPeopleData(null));
     const residentCount = planet.residents.length;
     if (residentCount) {
-      const newPeople = { ...people };
-      newPeople.results = null;
-      dispatch(setPeople(newPeople));
       navigate(`/people/${residentCount}`);
-
       Promise.allSettled(planet.residents.map((item) => axios.get(item))).then(
         (res) => {
           const filterData = res.map((item) => {
             if (item.status === "fulfilled") return item.value.data;
           });
-          const filterPeople = { ...people };
-          filterPeople.results = [...filterData];
-          dispatch(setPeople(filterPeople));
+          const newObj = {
+            results: [...filterData],
+          };
+          dispatch(setPeopleData(newObj));
         }
       );
     }

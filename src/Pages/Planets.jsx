@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import axios from "axios";
 import { PlanetCard, CardSkeleton, Pagination } from "../Components";
-import { setPlanetUrl } from "../store/homeSlice";
 
 const Planets = () => {
-  const [planetsData, setPlanetsData] = useState(null);
-  const { planets } = useSelector((state) => state.home);
+  const [planets, setPlanets] = useState(null);
+  const [planetUrl, setPlanetUrl] = useState("https://swapi.dev/api/planets/");
 
   useEffect(() => {
-    setPlanetsData(planets?.results);
-  }, [planets]);
+    axios
+      .get(planetUrl)
+      .then((res) => setPlanets(res?.data))
+      .catch((res) => console.error(res))
+      .finally(window.scroll(0, 0));
+  }, [planetUrl]);
 
-  return planetsData ? (
+  return planets ? (
     <div className="w-full h-fit flex justify-center flex-wrap gap-5">
-      {planetsData.map((item) => (
+      {planets.results.map((item) => (
         <PlanetCard key={item.url} planet={item} />
       ))}
-      <Pagination
-        setData={setPlanetsData}
-        setUrl={setPlanetUrl}
-        data={planets}
-      />
+      <Pagination setData={setPlanets} setUrl={setPlanetUrl} data={planets} />
     </div>
   ) : (
     <div className="w-full h-fit flex flex-wrap justify-center gap-5">
