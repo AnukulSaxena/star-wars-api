@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { PeopleCard, CardSkeleton, Pagination } from "../Components";
 import { setPeopleUrl } from "../store/homeSlice";
+import { useParams } from "react-router-dom";
 
 const People = () => {
   const [peopleData, setPeopleData] = useState(null);
   const { people } = useSelector((state) => state.home);
+  const { pageNum } = useParams();
 
   useEffect(() => {
     setPeopleData(people?.results);
@@ -16,7 +18,13 @@ const People = () => {
       {peopleData.map((item) => (
         <PeopleCard key={item.url} person={item} />
       ))}
-      <Pagination setData={setPeopleData} setUrl={setPeopleUrl} data={people} />
+      {pageNum === "1" && (
+        <Pagination
+          setData={setPeopleData}
+          setUrl={setPeopleUrl}
+          data={people}
+        />
+      )}
     </div>
   ) : (
     <div className="w-full h-fit flex flex-wrap justify-center gap-5">
